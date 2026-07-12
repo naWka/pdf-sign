@@ -1,0 +1,113 @@
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: color-mix(in oklch, var(--paper) 82%, transparent);
+  backdrop-filter: saturate(1.2) blur(10px);
+  border-bottom: 1px solid var(--border);
+}
+.navInner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 66px;
+}
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.05rem;
+  letter-spacing: -0.01em;
+}
+.brandMark {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  display: grid;
+  place-items: center;
+  background: var(--ink);
+  color: var(--on-ink);
+}
+.brandMark svg {
+  width: 18px;
+  height: 18px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.links {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+.links a {
+  font-size: 0.95rem;
+  color: var(--text-2);
+  transition: color 0.15s var(--ease);
+}
+.links a:hover {
+  color: var(--ink);
+}
+.navCta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 42px;
+  padding: 0 18px;
+  border-radius: var(--r-pill);
+  background: var(--ink);
+  color: var(--on-ink);
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+.navCta:hover {
+  background: var(--ink-hover);
+}
+.navCta svg {
+  width: 18px;
+  height: 18px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+@media (max-width: 680px) {
+  .links a:not(.navCta) {
+    display: none;
+  }
+}
+
+.footer {
+  border-top: 1px solid var(--border);
+  padding: 48px 0 56px;
+  background: var(--workspace);
+}
+.footInner {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  align-items: center;
+  justify-content: space-between;
+}
+.footLinks {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.footLinks a {
+  font-size: 0.9rem;
+  color: var(--text-2);
+}
+.footLinks a:hover {
+  color: var(--ink);
+}
+.footNote {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  max-width: 40ch;
+}

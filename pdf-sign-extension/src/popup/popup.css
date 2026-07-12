@@ -1,0 +1,95 @@
+.popup {
+  width: 320px;
+  padding: 18px;
+  background: var(--surface);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.popup__head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.popup__mark {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--r-md);
+  background: var(--ink-soft);
+}
+.popup__title {
+  font-size: var(--fs-lg);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+.popup__sub {
+  font-size: var(--fs-xs);
+  color: var(--text-muted);
+}
+
+.popup__hint {
+  font-size: var(--fs-sm);
+  color: var(--text-2);
+  line-height: 1.45;
+}
+
+/* License / usage status card */
+.status {
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  padding: 12px 14px;
+  font-size: var(--fs-sm);
+  background: var(--surface-2);
+}
+.status--unlocked {
+  background: var(--success-soft);
+  border-color: transparent;
+}
+.status--unlocked .status__title {
+  color: var(--success);
+}
+.status__title {
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.status__body {
+  color: var(--text-2);
+  margin-top: 3px;
+}
+.status__meter {
+  height: 6px;
+  border-radius: var(--r-pill);
+  background: var(--border);
+  overflow: hidden;
+  margin-top: 9px;
+}
+.status__meter > span {
+  display: block;
+  height: 100%;
+  background: var(--ink);
+  border-radius: var(--r-pill);
+  transition: width var(--dur) var(--ease);
+}
+
+.popup__foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 4px;
+  border-top: 1px solid var(--border);
+  margin-top: 2px;
+}
+.popup__link {
+  font-size: var(--fs-xs);
+  color: var(--text-muted);
+  text-decoration: none;
+}
+.popup__link:hover {
+  color: var(--ink);
+  text-decoration: underline;
+}

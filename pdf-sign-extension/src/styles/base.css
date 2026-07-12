@@ -1,0 +1,181 @@
+/* Reset + primitives shared across popup, options, and editor. */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/* The `hidden` attribute must win over component display rules (e.g. a
+   position:fixed intake overlay that would otherwise keep covering the editor). */
+[hidden] {
+  display: none !important;
+}
+
+body {
+  font-family: var(--font-ui);
+  font-size: var(--fs-base);
+  line-height: 1.5;
+  color: var(--text);
+  background: var(--surface);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3,
+h4,
+p {
+  margin: 0;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+}
+
+:focus-visible {
+  outline: 2px solid var(--ink-ring);
+  outline-offset: 2px;
+  border-radius: var(--r-sm);
+}
+
+.tnum {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Buttons ------------------------------------------------------------------ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 36px;
+  padding: 0 16px;
+  border: 1px solid transparent;
+  border-radius: var(--r-md);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  white-space: nowrap;
+  transition:
+    background var(--dur-fast) var(--ease),
+    border-color var(--dur-fast) var(--ease),
+    transform var(--dur-fast) var(--ease),
+    opacity var(--dur-fast) var(--ease);
+  user-select: none;
+}
+.btn:active {
+  transform: translateY(0.5px) scale(0.99);
+}
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn--primary {
+  background: var(--ink);
+  color: var(--on-ink);
+}
+.btn--primary:hover:not(:disabled) {
+  background: var(--ink-hover);
+}
+.btn--primary:active:not(:disabled) {
+  background: var(--ink-active);
+}
+
+.btn--secondary {
+  background: var(--surface);
+  border-color: var(--border);
+  color: var(--text);
+}
+.btn--secondary:hover:not(:disabled) {
+  background: var(--surface-2);
+  border-color: var(--border-strong);
+}
+
+.btn--ghost {
+  background: transparent;
+  color: var(--text-2);
+}
+.btn--ghost:hover:not(:disabled) {
+  background: var(--surface-2);
+  color: var(--text);
+}
+
+.btn--gold {
+  background: var(--gold);
+  color: oklch(0.28 0.06 70);
+  font-weight: 600;
+}
+.btn--gold:hover:not(:disabled) {
+  filter: brightness(1.04);
+}
+
+.btn--danger {
+  background: transparent;
+  color: var(--danger);
+}
+.btn--danger:hover:not(:disabled) {
+  background: var(--danger-soft);
+}
+
+.btn--sm {
+  height: 30px;
+  padding: 0 11px;
+  font-size: var(--fs-xs);
+}
+.btn--block {
+  width: 100%;
+}
+
+/* Icon button (toolbar) ---------------------------------------------------- */
+.iconbtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border: 1px solid transparent;
+  border-radius: var(--r-md);
+  background: transparent;
+  color: var(--text-2);
+  transition:
+    background var(--dur-fast) var(--ease),
+    color var(--dur-fast) var(--ease);
+}
+.iconbtn:hover {
+  background: var(--surface-2);
+  color: var(--text);
+}
+.iconbtn[aria-pressed='true'],
+.iconbtn.is-active {
+  background: var(--ink-soft);
+  color: var(--ink);
+}
+.iconbtn svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* Utility ------------------------------------------------------------------ */
+.muted {
+  color: var(--text-muted);
+}
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

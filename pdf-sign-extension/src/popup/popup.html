@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign & Fill PDF</title>
+    <link rel="stylesheet" href="../styles/tokens.css" />
+    <link rel="stylesheet" href="../styles/base.css" />
+    <link rel="stylesheet" href="./popup.css" />
+  </head>
+  <body>
+    <div class="popup">
+      <header class="popup__head">
+        <div class="popup__mark" aria-hidden="true">
+          <img src="../assets/icons/icon-48.png" alt="" width="28" height="28" />
+        </div>
+        <div>
+          <h1 class="popup__title">Sign &amp; Fill PDF</h1>
+          <p class="popup__sub">Private, local, offline</p>
+        </div>
+      </header>
+
+      <button id="open-editor" class="btn btn--primary btn--block">
+        Open editor
+      </button>
+
+      <p class="popup__hint">
+        Drop a PDF into the editor, sign it, and download. Your file never leaves
+        this device.
+      </p>
+
+      <div id="status" class="status" hidden></div>
+
+      <footer class="popup__foot">
+        <button id="open-options" class="btn btn--ghost btn--sm">
+          License &amp; signatures
+        </button>
+        <a id="privacy" class="popup__link" href="#" target="_blank" rel="noopener"
+          >Privacy</a
+        >
+      </footer>
+    </div>
+    <script type="module" src="./popup.ts"></script>
+  </body>
+</html>

@@ -1,0 +1,32 @@
+{
+  "permissions": {
+    "defaultMode": "bypassPermissions",
+    "allow": [
+      "Bash",
+      "Bash(npm:*)",
+      "Bash(npx:*)",
+      "Bash(node:*)",
+      "Bash(pnpm:*)",
+      "Bash(yarn:*)",
+      "Bash(git:*)",
+      "Bash(gh:*)",
+      "Bash(supabase:*)",
+      "Bash(vercel:*)",
+      "Bash(openssl:*)",
+      "Bash(playwright:*)",
+      "Read",
+      "Write",
+      "Edit",
+      "MultiEdit",
+      "WebFetch",
+      "WebSearch",
+      "Agent",
+      "Task",
+      "Skill",
+      "Artifact"
+    ],
+    "deny": [],
+    "ask": []
+  },
+  "enableAllProjectMcpServers": true
+}

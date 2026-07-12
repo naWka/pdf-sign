@@ -1,0 +1,66 @@
+/* Design tokens — see DESIGN.md. A refined document workspace: paper sheet on a
+   warm neutral desk, marked with fountain-pen ink. Light theme, restrained color.
+   All neutrals tinted toward the ink hue (275) at very low chroma; never #000/#fff. */
+
+:root {
+  /* Neutrals — warm, ink-tinted */
+  --workspace: oklch(0.955 0.006 275);
+  --surface: oklch(0.992 0.004 275);
+  --surface-2: oklch(0.975 0.005 275);
+  --sheet: oklch(0.998 0.002 275);
+  --border: oklch(0.905 0.008 275);
+  --border-strong: oklch(0.84 0.01 275);
+
+  --text: oklch(0.255 0.02 275);
+  --text-2: oklch(0.47 0.016 275);
+  --text-muted: oklch(0.62 0.012 275);
+
+  /* Accent — fountain-pen ink (indigo ~275) */
+  --ink: oklch(0.48 0.14 275);
+  --ink-hover: oklch(0.42 0.15 275);
+  --ink-active: oklch(0.37 0.15 275);
+  --ink-soft: oklch(0.95 0.03 275);
+  --ink-ring: oklch(0.48 0.14 275 / 0.4);
+  --on-ink: oklch(0.985 0.005 275);
+
+  /* Lifetime / forever — warm gold, used once (paywall) */
+  --gold: oklch(0.76 0.115 80);
+  --gold-soft: oklch(0.955 0.045 85);
+  --gold-text: oklch(0.48 0.09 70);
+
+  /* Semantic */
+  --success: oklch(0.56 0.11 155);
+  --success-soft: oklch(0.955 0.035 155);
+  --danger: oklch(0.555 0.16 25);
+  --danger-soft: oklch(0.955 0.04 25);
+
+  /* Elevation */
+  --shadow-sm: 0 1px 2px oklch(0.255 0.02 275 / 0.06);
+  --shadow-md: 0 4px 12px oklch(0.255 0.02 275 / 0.08);
+  --shadow-lg: 0 12px 40px oklch(0.255 0.02 275 / 0.14);
+  --shadow-sheet: 0 8px 30px oklch(0.255 0.02 275 / 0.12),
+    0 1px 3px oklch(0.255 0.02 275 / 0.1);
+
+  /* Radius */
+  --r-sm: 6px;
+  --r-md: 10px;
+  --r-lg: 14px;
+  --r-pill: 999px;
+
+  /* Motion — ease-out-quint, no bounce */
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-fast: 120ms;
+  --dur: 200ms;
+  --dur-slow: 320ms;
+
+  /* Type scale (1.25 ratio) */
+  --fs-xs: 12px;
+  --fs-sm: 13px;
+  --fs-base: 15px;
+  --fs-lg: 19px;
+  --fs-xl: 24px;
+  --fs-2xl: 30px;
+  --fs-3xl: 38px;
+
+  --font-ui: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+}

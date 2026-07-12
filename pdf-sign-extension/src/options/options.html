@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign &amp; Fill PDF — Settings</title>
+    <link rel="stylesheet" href="../styles/tokens.css" />
+    <link rel="stylesheet" href="../styles/base.css" />
+    <link rel="stylesheet" href="./options.css" />
+  </head>
+  <body>
+    <main class="opt">
+      <header class="opt__head">
+        <img src="../assets/icons/icon-48.png" alt="" width="32" height="32" />
+        <div>
+          <h1>Sign &amp; Fill PDF</h1>
+          <p class="muted">Settings, license, and saved signatures</p>
+        </div>
+      </header>
+
+      <section class="opt__card" id="license-card">
+        <h2>License</h2>
+        <div id="license-body"></div>
+      </section>
+
+      <section class="opt__card">
+        <div class="opt__card-head">
+          <h2>Saved signatures</h2>
+          <span class="muted" id="sig-count"></span>
+        </div>
+        <p class="muted opt__hint">
+          Stored only on this device. Reused across documents so you never redraw.
+        </p>
+        <div class="opt__sigs" id="sig-list"></div>
+      </section>
+
+      <footer class="opt__foot">
+        <a href="#" id="privacy-link" target="_blank" rel="noopener">Privacy policy</a>
+        <span class="muted">Everything runs locally. Your files are never uploaded.</span>
+      </footer>
+    </main>
+    <div id="toast-root" class="toast-root" aria-live="polite"></div>
+    <script type="module" src="./options.ts"></script>
+  </body>
+</html>

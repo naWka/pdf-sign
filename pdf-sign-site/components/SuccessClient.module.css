@@ -1,0 +1,122 @@
+.wrap {
+  max-width: 620px;
+  margin: 0 auto;
+  padding: clamp(56px, 8vw, 100px) 24px;
+  text-align: center;
+}
+.badge {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 22px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--success-soft);
+  color: var(--success);
+}
+.badge svg {
+  width: 30px;
+  height: 30px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.title {
+  font-size: var(--fs-h2);
+  margin-bottom: 10px;
+}
+.sub {
+  color: var(--text-2);
+  font-size: var(--fs-lead);
+  margin-bottom: 32px;
+}
+.keyBox {
+  text-align: left;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: 22px;
+  box-shadow: var(--shadow-sm);
+}
+.keyLabel {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.keyRow {
+  display: flex;
+  gap: 10px;
+  align-items: stretch;
+}
+.key {
+  flex: 1;
+  min-width: 0;
+  font-family: ui-monospace, Menlo, monospace;
+  font-size: 0.85rem;
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  background: var(--paper);
+  color: var(--text);
+  word-break: break-all;
+  max-height: 96px;
+  overflow: auto;
+}
+.copy {
+  flex: none;
+  padding: 0 18px;
+  border: none;
+  border-radius: var(--r-md);
+  background: var(--ink);
+  color: var(--on-ink);
+  font-weight: 600;
+  cursor: pointer;
+}
+.copy:hover {
+  background: var(--ink-hover);
+}
+.steps {
+  text-align: left;
+  margin: 28px 0 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: step;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.steps li {
+  counter-increment: step;
+  display: flex;
+  gap: 12px;
+  color: var(--text-2);
+}
+.steps li::before {
+  content: counter(step);
+  flex: none;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--ink-soft);
+  color: var(--ink);
+  font-weight: 700;
+  font-size: 0.85rem;
+  display: grid;
+  place-items: center;
+}
+.state {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  margin-top: 10px;
+}
+.err {
+  color: var(--text-2);
+  background: var(--surface-2);
+  border-radius: var(--r-md);
+  padding: 16px;
+}

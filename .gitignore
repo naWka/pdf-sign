@@ -1,0 +1,22 @@
+# Dependencies & build output
+node_modules/
+dist/
+.next/
+out/
+.vercel/
+
+# Env & secrets
+.env
+.env.local
+*.local
+.claude/settings.local.json
+*.pem
+private.pem
+
+# Playwright
+test-results/
+playwright-report/
+pdf-sign-extension/tests/fixtures/sample.pdf
+
+# OS
+.DS_Store

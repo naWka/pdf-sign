@@ -1,0 +1,12 @@
+node_modules
+dist
+.env
+*.local
+.DS_Store
+# Playwright
+test-results
+playwright-report
+tests/fixtures/sample.pdf
+# Real signing keys must never be committed.
+keys/private.pem
+private.pem

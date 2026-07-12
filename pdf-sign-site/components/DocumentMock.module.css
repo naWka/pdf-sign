@@ -1,0 +1,195 @@
+.stage {
+  position: relative;
+  perspective: 1600px;
+}
+
+.sheet {
+  position: relative;
+  background: var(--paper);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  box-shadow: var(--shadow-sheet);
+  padding: 34px 34px 30px;
+  transform: rotateX(4deg) rotateY(-7deg) rotateZ(0.6deg);
+  transform-origin: center;
+  transition: transform 0.5s var(--ease);
+}
+.stage:hover .sheet {
+  transform: rotateX(2deg) rotateY(-3deg);
+}
+
+.docTitle {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+.docSub {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-bottom: 22px;
+}
+
+.line {
+  height: 9px;
+  border-radius: 5px;
+  background: var(--surface-2);
+  margin: 11px 0;
+}
+.line.short {
+  width: 55%;
+}
+.line.mid {
+  width: 78%;
+}
+
+.row {
+  display: flex;
+  align-items: flex-end;
+  gap: 28px;
+  margin-top: 26px;
+}
+.field {
+  flex: 1;
+}
+.fieldLabel {
+  font-size: 0.7rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+.fieldRule {
+  border-bottom: 1.5px solid var(--border-strong);
+  padding-bottom: 6px;
+}
+
+/* Filled-in values sit on the rules, tinted ink */
+.filled {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--ink);
+  font-weight: 500;
+}
+.dateVal {
+  font-variant-numeric: tabular-nums;
+}
+
+.sig {
+  width: 100%;
+  height: 58px;
+}
+.sig path {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 620;
+  stroke-dashoffset: 620;
+  animation: draw 2s var(--ease) 0.4s forwards;
+}
+@keyframes draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.check {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  margin-top: 24px;
+  font-size: 0.9rem;
+  color: var(--text-2);
+}
+.checkbox {
+  width: 20px;
+  height: 20px;
+  border: 1.5px solid var(--ink);
+  border-radius: 5px;
+  display: grid;
+  place-items: center;
+  color: var(--ink);
+}
+.checkbox svg {
+  width: 14px;
+  height: 14px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Floating chips */
+.chip {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 14px;
+  border-radius: var(--r-pill);
+  background: var(--paper);
+  box-shadow: var(--shadow-md);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+.chip svg {
+  width: 16px;
+  height: 16px;
+  stroke: var(--success);
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.chipLocal {
+  top: -18px;
+  right: -14px;
+  color: var(--success);
+  animation: floaty 5s ease-in-out infinite;
+}
+.chipOffline {
+  bottom: 40px;
+  left: -30px;
+  animation: floaty 6s ease-in-out infinite 0.5s;
+}
+.chipOffline svg {
+  stroke: var(--ink);
+}
+@keyframes floaty {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@media (max-width: 640px) {
+  .sheet {
+    transform: none;
+    padding: 24px;
+  }
+  .chipOffline {
+    left: -8px;
+  }
+  .chipLocal {
+    right: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sig path {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+  .chipLocal,
+  .chipOffline {
+    animation: none;
+  }
+}

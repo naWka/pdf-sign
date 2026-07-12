@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Screenshot 4 — Privacy</title>
+    <link rel="stylesheet" href="store.css" />
+    <style>
+      .frame--dark { background: var(--ink-deep); color: var(--on-ink); }
+      .frame--dark .h { color: #fff; }
+      .frame--dark .sub { color: oklch(0.9 0.03 275); }
+      .big-lock { width: 320px; height: 320px; stroke: oklch(0.72 0.14 275); fill: none; stroke-width: 1.2; stroke-linecap: round; stroke-linejoin: round; opacity: 0.9; }
+      .plist { list-style: none; padding: 0; margin: 28px 0 0; display: flex; flex-direction: column; gap: 16px; }
+      .plist li { display: flex; align-items: center; gap: 14px; font-size: 21px; }
+      .plist svg { width: 26px; height: 26px; stroke: oklch(0.82 0.13 155); fill: none; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+    </style>
+  </head>
+  <body>
+    <div class="frame frame--dark">
+      <div class="copy" style="max-width: 560px">
+        <div class="h">Stays on <span style="color: oklch(0.75 0.14 275)">your device.</span></div>
+        <p class="sub">No cloud, no server, no account. Verify it yourself in the Network tab.</p>
+        <ul class="plist">
+          <li><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7" /></svg> Nothing is uploaded, ever</li>
+          <li><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7" /></svg> No sign-up, no email</li>
+          <li><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7" /></svg> Works fully offline</li>
+        </ul>
+      </div>
+      <div style="flex: 1; display: grid; place-items: center">
+        <svg class="big-lock" viewBox="0 0 24 24"><rect x="4.5" y="10" width="15" height="10" rx="2" /><path d="M8 10V7a4 4 0 0 1 8 0v3" /><path d="M12 14v2.5" /></svg>
+      </div>
+    </div>
+  </body>
+</html>

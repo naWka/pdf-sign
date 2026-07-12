@@ -1,0 +1,12 @@
+# Minimal Supabase CLI config. Replace project_id after `supabase link`.
+project_id = "sign-fill-pdf"
+
+[functions.paddle-webhook]
+# Paddle cannot present a Supabase JWT; we verify Paddle's own signature instead.
+verify_jwt = false
+
+[functions.get-license]
+verify_jwt = false
+
+[functions.license-status]
+verify_jwt = false

@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign &amp; Fill PDF — Editor</title>
+    <link rel="stylesheet" href="../styles/tokens.css" />
+    <link rel="stylesheet" href="../styles/base.css" />
+    <link rel="stylesheet" href="./editor.css" />
+  </head>
+  <body>
+    <!-- Empty state / file intake -->
+    <section class="intake" id="intake">
+      <div class="intake__inner">
+        <div class="intake__brand">
+          <img src="../assets/icons/icon-128.png" alt="" width="40" height="40" />
+          <span>Sign &amp; Fill PDF</span>
+        </div>
+        <h1 class="intake__title">Sign and fill any PDF, right here.</h1>
+        <p class="intake__lede">
+          No upload, no account. Your file is opened locally and never leaves this
+          device.
+        </p>
+
+        <div
+          class="dropzone"
+          id="dropzone"
+          role="button"
+          tabindex="0"
+          aria-label="Drop a PDF here or choose a file"
+        >
+          <div class="dropzone__icon" aria-hidden="true"></div>
+          <p class="dropzone__title">Drop a PDF here</p>
+          <p class="dropzone__or">or</p>
+          <button class="btn btn--primary" id="choose-file">Choose a PDF</button>
+          <input type="file" id="file-input" accept="application/pdf" hidden />
+        </div>
+
+        <ul class="intake__assurances">
+          <li data-icon="shield">Processed on your device</li>
+          <li data-icon="lock">Nothing uploaded</li>
+          <li data-icon="check">Works offline</li>
+        </ul>
+        <p class="intake__error" id="intake-error" hidden></p>
+      </div>
+    </section>
+
+    <!-- Editor -->
+    <div class="editor" id="editor" hidden>
+      <header class="topbar" id="topbar"></header>
+      <div class="workspace">
+        <nav class="toolrail" id="toolrail" aria-label="Tools"></nav>
+        <main class="scroll" id="pages" aria-label="Document pages"></main>
+        <aside class="inspector" id="inspector" aria-label="Properties"></aside>
+      </div>
+    </div>
+
+    <div id="modal-root"></div>
+    <div id="toast-root" class="toast-root" aria-live="polite"></div>
+
+    <script type="module" src="./editor.ts"></script>
+  </body>
+</html>
