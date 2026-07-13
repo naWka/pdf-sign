@@ -39,7 +39,7 @@
   padding: 20px 22px;
   border-radius: var(--r-md);
   background: var(--ink-soft);
-  color: var(--ink-deep);
+  color: var(--ink);
   font-weight: 500;
   margin: 24px 0;
 }
