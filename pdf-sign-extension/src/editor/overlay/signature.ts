@@ -32,15 +32,26 @@ export function openSignatureCapture(
   })
 }
 
+// Preset ink colors for the draw / type modes, plus a custom picker.
+const SIG_COLORS = [
+  { key: 'ink', value: INK_COLOR },
+  { key: 'black', value: '#15171c' },
+  { key: 'blue', value: '#1e4fd6' },
+  { key: 'red', value: '#c0392b' },
+]
+
 class SignatureModal {
   private root!: HTMLElement
   private mode: Mode = 'draw'
   private drawCanvas!: HTMLCanvasElement
+  private drawCtx: CanvasRenderingContext2D | null = null
   private hasDrawing = false
   private typeValue = ''
   private typeFont = DEFAULT_SIGNATURE_FONT
   private uploaded: CapturedImage | null = null
   private saveForLater = true
+  /** Ink color applied to draw strokes and typed signatures. */
+  private color = INK_COLOR
 
   constructor(
     private title: string,
@@ -56,6 +67,7 @@ class SignatureModal {
     this.drawCanvas = this.root.querySelector('.sig-draw__canvas')!
     this.setupDraw()
     this.setupTabs()
+    this.setupColors()
     this.setupType()
     this.setupUpload()
     await this.renderSaved()
@@ -84,6 +96,18 @@ class SignatureModal {
           <button class="sig__tab" data-mode="type">Type</button>
           <button class="sig__tab" data-mode="upload">Upload</button>
           <button class="sig__tab" data-mode="saved">Saved</button>
+        </div>
+
+        <div class="sig__colors" data-role="colors">
+          <span class="sig__colors-label">Color</span>
+          ${SIG_COLORS.map(
+            (c, i) =>
+              `<button class="sig__swatch ${i === 0 ? 'is-active' : ''}" data-color="${c.value}" style="--sw:${c.value}" aria-label="${c.key}"></button>`,
+          ).join('')}
+          <label class="sig__custom" title="Custom color">
+            <span class="sig__custom-dot"></span>
+            <input type="color" class="sig__picker" value="${INK_COLOR}" aria-label="Custom color" />
+          </label>
         </div>
 
         <div class="sig__panel" data-panel="draw">
@@ -155,6 +179,36 @@ class SignatureModal {
     // The "Save for reuse" checkbox is meaningless for the saved list.
     ;(this.root.querySelector('.sig__save') as HTMLElement).style.visibility =
       mode === 'saved' ? 'hidden' : 'visible'
+    // Color only applies to draw / type (upload & saved keep their own colors).
+    ;(this.root.querySelector('.sig__colors') as HTMLElement).style.visibility =
+      mode === 'draw' || mode === 'type' ? 'visible' : 'hidden'
+  }
+
+  private setupColors(): void {
+    const apply = (value: string, fromPicker = false) => {
+      this.color = value
+      if (this.drawCtx) this.drawCtx.strokeStyle = value
+      // Reflect selection state on the presets.
+      this.root.querySelectorAll<HTMLElement>('.sig__swatch').forEach((s) => {
+        s.classList.toggle('is-active', s.dataset.color?.toLowerCase() === value.toLowerCase())
+      })
+      const custom = this.root.querySelector<HTMLElement>('.sig__custom')
+      const known = SIG_COLORS.some((c) => c.value.toLowerCase() === value.toLowerCase())
+      const isCustom = !known || fromPicker
+      custom?.classList.toggle('is-active', isCustom)
+      // Show the chosen color on the custom chip only when it IS custom; otherwise
+      // keep the rainbow (CSS) that signals "pick any color".
+      const dot = this.root.querySelector<HTMLElement>('.sig__custom-dot')
+      if (dot) dot.style.background = isCustom ? value : ''
+      // Refresh the type preview if it is showing.
+      const preview = this.root.querySelector<HTMLElement>('.sig-type__preview')
+      if (preview) preview.style.color = value
+    }
+    this.root.querySelectorAll<HTMLElement>('.sig__swatch').forEach((btn) => {
+      btn.addEventListener('click', () => apply(btn.dataset.color!))
+    })
+    const picker = this.root.querySelector<HTMLInputElement>('.sig__picker')
+    picker?.addEventListener('input', () => apply(picker.value, true))
   }
 
   // --- Draw --------------------------------------------------------------
@@ -165,38 +219,52 @@ class SignatureModal {
     canvas.width = 640 * dpr
     canvas.height = 240 * dpr
     ctx.scale(dpr, dpr)
-    ctx.strokeStyle = INK_COLOR
+    ctx.strokeStyle = this.color
     ctx.lineWidth = 2.6
     ctx.lineJoin = 'round'
     ctx.lineCap = 'round'
+    this.drawCtx = ctx
 
+    type Pt = { x: number; y: number }
     let drawing = false
-    let last: { x: number; y: number } | null = null
-    const pos = (e: PointerEvent) => {
+    let last: Pt | null = null // previous raw point (used as the curve control)
+    let lastMid: Pt | null = null // previous midpoint (where the last curve ended)
+    const pos = (e: PointerEvent): Pt => {
       const r = canvas.getBoundingClientRect()
       return { x: ((e.clientX - r.left) / r.width) * 640, y: ((e.clientY - r.top) / r.height) * 240 }
     }
+    const mid = (a: Pt, b: Pt): Pt => ({ x: (a.x + b.x) / 2, y: (a.y + b.y) / 2 })
+
     canvas.addEventListener('pointerdown', (e) => {
       drawing = true
       last = pos(e)
+      lastMid = last
+      // Seed a dot so a tap or the very start of a stroke is visible.
+      ctx.beginPath()
+      ctx.arc(last.x, last.y, ctx.lineWidth / 2, 0, Math.PI * 2)
+      ctx.fillStyle = this.color
+      ctx.fill()
       canvas.setPointerCapture(e.pointerId)
     })
     canvas.addEventListener('pointermove', (e) => {
-      if (!drawing || !last) return
+      if (!drawing || !last || !lastMid) return
       const p = pos(e)
+      const m = mid(last, p)
+      // Continuous quadratic smoothing: run from the previous midpoint, through
+      // the last raw point (control), to the new midpoint. No gaps between moves.
       ctx.beginPath()
-      ctx.moveTo(last.x, last.y)
-      // Quadratic smoothing for a more natural stroke.
-      const mid = { x: (last.x + p.x) / 2, y: (last.y + p.y) / 2 }
-      ctx.quadraticCurveTo(last.x, last.y, mid.x, mid.y)
+      ctx.moveTo(lastMid.x, lastMid.y)
+      ctx.quadraticCurveTo(last.x, last.y, m.x, m.y)
       ctx.stroke()
       last = p
+      lastMid = m
       this.hasDrawing = true
       this.root.querySelector('.sig-draw__hint')?.classList.add('is-hidden')
     })
     const stop = () => {
       drawing = false
       last = null
+      lastMid = null
     }
     canvas.addEventListener('pointerup', stop)
     canvas.addEventListener('pointercancel', stop)
@@ -217,7 +285,7 @@ class SignatureModal {
       const font = FONT_FAMILIES.find((f) => f.key === this.typeFont)!
       preview.textContent = input.value || 'Signature'
       preview.style.fontFamily = font.cssFamily
-      preview.style.color = INK_COLOR
+      preview.style.color = this.color
       preview.classList.toggle('is-placeholder', !input.value)
     }
     input.addEventListener('input', update)
@@ -309,7 +377,7 @@ class SignatureModal {
     }
     if (this.mode === 'type') {
       if (!this.typeValue.trim()) return null
-      return renderTypedSignature(this.typeValue.trim(), this.typeFont)
+      return renderTypedSignature(this.typeValue.trim(), this.typeFont, this.color)
     }
     if (this.mode === 'upload') {
       return this.uploaded
@@ -361,7 +429,7 @@ function fileToImage(file: File): Promise<HTMLImageElement> {
 }
 
 /** Render typed text in a script font to a trimmed transparent PNG. */
-function renderTypedSignature(text: string, fontKey: string): CapturedImage {
+function renderTypedSignature(text: string, fontKey: string, color: string): CapturedImage {
   const font = FONT_FAMILIES.find((f) => f.key === fontKey)!
   const fontSize = 120
   const measure = document.createElement('canvas').getContext('2d')!
@@ -373,7 +441,7 @@ function renderTypedSignature(text: string, fontKey: string): CapturedImage {
   canvas.height = h
   const ctx = canvas.getContext('2d')!
   ctx.font = `${fontSize}px ${font.cssFamily}`
-  ctx.fillStyle = INK_COLOR
+  ctx.fillStyle = color
   ctx.textBaseline = 'middle'
   ctx.fillText(text, 30, h / 2)
   return trimTransparent(canvas)

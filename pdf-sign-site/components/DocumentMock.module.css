@@ -3,10 +3,17 @@
   perspective: 1600px;
 }
 
+/* The sheet is a picture of paper: it stays light and its ink stays dark in
+   every theme, so its internal colors are pinned, not themed. */
 .sheet {
   position: relative;
-  background: var(--paper);
-  border: 1px solid var(--border);
+  --doc-ink: oklch(0.47 0.145 275);
+  --doc-text: oklch(0.235 0.022 275);
+  --doc-muted: oklch(0.6 0.014 275);
+  --doc-line: oklch(0.94 0.006 275);
+  --doc-rule: oklch(0.82 0.012 275);
+  background: var(--sheet);
+  border: 1px solid oklch(0.9 0.008 275);
   border-radius: var(--r-md);
   box-shadow: var(--shadow-sheet);
   padding: 34px 34px 30px;
@@ -22,19 +29,19 @@
   font-family: var(--font-display);
   font-weight: 600;
   font-size: 1.1rem;
-  color: var(--text);
+  color: var(--doc-text);
   margin-bottom: 4px;
 }
 .docSub {
   font-size: 0.8rem;
-  color: var(--text-muted);
+  color: var(--doc-muted);
   margin-bottom: 22px;
 }
 
 .line {
   height: 9px;
   border-radius: 5px;
-  background: var(--surface-2);
+  background: var(--doc-line);
   margin: 11px 0;
 }
 .line.short {
@@ -57,11 +64,11 @@
   font-size: 0.7rem;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: var(--text-muted);
+  color: var(--doc-muted);
   margin-bottom: 8px;
 }
 .fieldRule {
-  border-bottom: 1.5px solid var(--border-strong);
+  border-bottom: 1.5px solid var(--doc-rule);
   padding-bottom: 6px;
 }
 
@@ -69,7 +76,7 @@
 .filled {
   font-family: var(--font-body);
   font-size: 0.95rem;
-  color: var(--ink);
+  color: var(--doc-ink);
   font-weight: 500;
 }
 .dateVal {
@@ -82,7 +89,7 @@
 }
 .sig path {
   fill: none;
-  stroke: var(--ink);
+  stroke: var(--doc-ink);
   stroke-width: 3;
   stroke-linecap: round;
   stroke-linejoin: round;
@@ -102,16 +109,16 @@
   gap: 9px;
   margin-top: 24px;
   font-size: 0.9rem;
-  color: var(--text-2);
+  color: var(--doc-text);
 }
 .checkbox {
   width: 20px;
   height: 20px;
-  border: 1.5px solid var(--ink);
+  border: 1.5px solid var(--doc-ink);
   border-radius: 5px;
   display: grid;
   place-items: center;
-  color: var(--ink);
+  color: var(--doc-ink);
 }
 .checkbox svg {
   width: 14px;

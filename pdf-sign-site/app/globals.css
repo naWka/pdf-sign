@@ -5,6 +5,8 @@
 :root {
   --workspace: oklch(0.965 0.006 275);
   --paper: oklch(0.995 0.003 275);
+  /* The document "sheet" stays paper-light in every theme (see DocumentMock). */
+  --sheet: oklch(0.995 0.003 275);
   --surface: oklch(0.992 0.004 275);
   --surface-2: oklch(0.975 0.005 275);
   --border: oklch(0.905 0.008 275);
@@ -48,6 +50,96 @@
   --fs-h3: clamp(1.25rem, 1.05rem + 0.9vw, 1.6rem);
   --fs-h2: clamp(1.9rem, 1.3rem + 2.6vw, 3rem);
   --fs-hero: clamp(2.6rem, 1.4rem + 5.6vw, 5.4rem);
+}
+
+/* Dark theme: the desk goes dark, the document sheet stays paper-light. Styled
+   through tokens only; components never hardcode a theme. */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --workspace: oklch(0.165 0.016 275);
+    --paper: oklch(0.195 0.018 275);
+    --sheet: oklch(0.99 0.003 275);
+    --surface: oklch(0.235 0.02 275);
+    --surface-2: oklch(0.275 0.022 275);
+    --border: oklch(0.335 0.02 275);
+    --border-strong: oklch(0.42 0.025 275);
+
+    --text: oklch(0.95 0.01 275);
+    --text-2: oklch(0.8 0.015 275);
+    --text-muted: oklch(0.66 0.015 275);
+
+    --ink: oklch(0.72 0.13 275);
+    --ink-hover: oklch(0.78 0.13 275);
+    --ink-deep: oklch(0.28 0.085 275);
+    --ink-soft: oklch(0.3 0.06 275);
+    --on-ink: oklch(0.16 0.02 275);
+
+    --gold: oklch(0.8 0.12 84);
+    --gold-soft: oklch(0.32 0.06 82);
+    --gold-text: oklch(0.86 0.1 84);
+    --success: oklch(0.72 0.13 155);
+    --success-soft: oklch(0.3 0.06 155);
+
+    --shadow-sm: 0 1px 2px oklch(0 0 0 / 0.3);
+    --shadow-md: 0 6px 22px oklch(0 0 0 / 0.4);
+    --shadow-lg: 0 24px 60px oklch(0 0 0 / 0.5);
+    --shadow-sheet: 0 24px 60px oklch(0 0 0 / 0.55), 0 2px 6px oklch(0 0 0 / 0.4);
+  }
+}
+
+/* The viewer's explicit toggle stamps data-theme and must win over the media
+   query in both directions. */
+:root[data-theme='light'] {
+  --workspace: oklch(0.965 0.006 275);
+  --paper: oklch(0.995 0.003 275);
+  --sheet: oklch(0.995 0.003 275);
+  --surface: oklch(0.992 0.004 275);
+  --surface-2: oklch(0.975 0.005 275);
+  --border: oklch(0.905 0.008 275);
+  --border-strong: oklch(0.84 0.01 275);
+  --text: oklch(0.235 0.022 275);
+  --text-2: oklch(0.44 0.018 275);
+  --text-muted: oklch(0.6 0.014 275);
+  --ink: oklch(0.47 0.145 275);
+  --ink-hover: oklch(0.41 0.155 275);
+  --ink-deep: oklch(0.33 0.13 275);
+  --ink-soft: oklch(0.95 0.03 275);
+  --on-ink: oklch(0.985 0.005 275);
+  --gold: oklch(0.78 0.12 82);
+  --gold-soft: oklch(0.96 0.05 88);
+  --gold-text: oklch(0.46 0.09 68);
+  --success: oklch(0.56 0.11 155);
+  --success-soft: oklch(0.955 0.035 155);
+  --shadow-sm: 0 1px 2px oklch(0.235 0.02 275 / 0.06);
+  --shadow-md: 0 6px 22px oklch(0.235 0.02 275 / 0.09);
+  --shadow-lg: 0 24px 60px oklch(0.235 0.02 275 / 0.16);
+  --shadow-sheet: 0 20px 60px oklch(0.235 0.02 275 / 0.16), 0 2px 6px oklch(0.235 0.02 275 / 0.1);
+}
+:root[data-theme='dark'] {
+  --workspace: oklch(0.165 0.016 275);
+  --paper: oklch(0.195 0.018 275);
+  --sheet: oklch(0.99 0.003 275);
+  --surface: oklch(0.235 0.02 275);
+  --surface-2: oklch(0.275 0.022 275);
+  --border: oklch(0.335 0.02 275);
+  --border-strong: oklch(0.42 0.025 275);
+  --text: oklch(0.95 0.01 275);
+  --text-2: oklch(0.8 0.015 275);
+  --text-muted: oklch(0.66 0.015 275);
+  --ink: oklch(0.72 0.13 275);
+  --ink-hover: oklch(0.78 0.13 275);
+  --ink-deep: oklch(0.28 0.085 275);
+  --ink-soft: oklch(0.3 0.06 275);
+  --on-ink: oklch(0.16 0.02 275);
+  --gold: oklch(0.8 0.12 84);
+  --gold-soft: oklch(0.32 0.06 82);
+  --gold-text: oklch(0.86 0.1 84);
+  --success: oklch(0.72 0.13 155);
+  --success-soft: oklch(0.3 0.06 155);
+  --shadow-sm: 0 1px 2px oklch(0 0 0 / 0.3);
+  --shadow-md: 0 6px 22px oklch(0 0 0 / 0.4);
+  --shadow-lg: 0 24px 60px oklch(0 0 0 / 0.5);
+  --shadow-sheet: 0 24px 60px oklch(0 0 0 / 0.55), 0 2px 6px oklch(0 0 0 / 0.4);
 }
 
 * {

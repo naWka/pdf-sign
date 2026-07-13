@@ -7,6 +7,7 @@ dist
 test-results
 playwright-report
 tests/fixtures/sample.pdf
+shots
 # Real signing keys must never be committed.
 keys/private.pem
 private.pem

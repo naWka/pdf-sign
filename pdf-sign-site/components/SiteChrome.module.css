@@ -44,12 +44,14 @@
   align-items: center;
   gap: 28px;
 }
-.links a {
+/* Exclude the CTA: a plain `.links a` rule (specificity 0,1,1) would otherwise
+   beat `.navCta` (0,1,0) and paint the CTA label dark on the ink pill. */
+.links a:not(.navCta) {
   font-size: 0.95rem;
   color: var(--text-2);
   transition: color 0.15s var(--ease);
 }
-.links a:hover {
+.links a:not(.navCta):hover {
   color: var(--ink);
 }
 .navCta {

@@ -37,6 +37,8 @@ export function Footer() {
         <div className={styles.footLinks}>
           <Link href="/pricing">Pricing</Link>
           <Link href="/privacy">Privacy</Link>
+          <Link href="/terms">Terms</Link>
+          <Link href="/refunds">Refunds</Link>
           <a href={config.storeUrl} target="_blank" rel="noopener">
             Add to Chrome
           </a>

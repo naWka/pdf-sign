@@ -236,7 +236,9 @@
 /* Privacy band ------------------------------------------------------------ */
 .privacy {
   background: var(--ink-deep);
-  color: var(--on-ink);
+  /* The band is always a dark surface, so its text stays light in both themes
+     rather than following --on-ink (which flips dark in dark mode). */
+  color: oklch(0.97 0.008 275);
   border-radius: clamp(20px, 3vw, 34px);
   padding: clamp(40px, 6vw, 76px);
   overflow: hidden;
@@ -287,7 +289,7 @@
   display: grid;
   place-items: center;
   background: oklch(0.6 0.16 275 / 0.25);
-  color: var(--on-ink);
+  color: oklch(0.97 0.008 275);
 }
 .assureIcon svg {
   width: 20px;

@@ -109,6 +109,12 @@
 - Отображаемая цена: `NEXT_PUBLIC_PRICE_DISPLAY` в `pdf-sign-site/.env.local` (реальная сумма — из Paddle price).
 - Финальное название расширения: выбрано `Sign PDF — Fill & Sign PDF Free, No Upload` в `manifest.config.ts` (альтернативы — в `store-assets/listing.md`).
 
+### Не доделано — «Restore purchase» (бриф для агента готов)
+- Флоу восстановления ключа по email не реализован. Полный инженерный бриф:
+  [`docs/restore-purchase.md`](restore-purchase.md) — отдай его агенту, он доделает.
+- Понадобится: аккаунт **Resend** (или другой email-провайдер) + верифицированный
+  домен отправки; секреты `RESEND_API_KEY`, `LICENSE_FROM_EMAIL` в Supabase.
+
 ### Проверки, которые агент оставил под тебя (нужен терминал/аккаунты)
 - Прогнать `cd pdf-sign-extension && npm install && npm run build && npm run audit:remote`.
 - Прогнать `cd pdf-sign-site && npm install && npm run build`.
