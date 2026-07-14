@@ -10,6 +10,7 @@ export const config = {
   paddleEnv: (process.env.NEXT_PUBLIC_PADDLE_ENV as 'sandbox' | 'production') || 'sandbox',
   functionsUrl: process.env.NEXT_PUBLIC_SUPABASE_FUNCTIONS_URL || '',
   priceDisplay: process.env.NEXT_PUBLIC_PRICE_DISPLAY || '$5',
+  supportEmail: process.env.NEXT_PUBLIC_SUPPORT_EMAIL || 'support@signfillpdf.com',
 }
 
 export const paddleConfigured = Boolean(config.paddleToken && config.paddlePriceId)
