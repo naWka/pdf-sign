@@ -9,7 +9,7 @@ export const config = {
   paddlePriceId: process.env.NEXT_PUBLIC_PADDLE_PRICE_ID || '',
   paddleEnv: (process.env.NEXT_PUBLIC_PADDLE_ENV as 'sandbox' | 'production') || 'sandbox',
   functionsUrl: process.env.NEXT_PUBLIC_SUPABASE_FUNCTIONS_URL || '',
-  priceDisplay: process.env.NEXT_PUBLIC_PRICE_DISPLAY || 'one-time',
+  priceDisplay: process.env.NEXT_PUBLIC_PRICE_DISPLAY || '$5',
 }
 
 export const paddleConfigured = Boolean(config.paddleToken && config.paddlePriceId)

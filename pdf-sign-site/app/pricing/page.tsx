@@ -42,8 +42,9 @@ export default function Pricing() {
             </ul>
             <BuyButton label={`Unlock lifetime for ${config.priceDisplay}`} />
             <p className={s.priceSub} style={{ marginTop: 20, fontSize: '0.85rem' }}>
-              Secure checkout by Paddle, our authorized reseller, which handles payment and
-              any applicable tax. After paying, you get a license key to paste into the
+              Price shown in USD. Taxes may apply and will be calculated at checkout. Secure
+              checkout by Paddle, our authorized reseller, which handles payment and any
+              applicable tax. After paying, you get a license key to paste into the
               extension&apos;s settings.
             </p>
           </div>

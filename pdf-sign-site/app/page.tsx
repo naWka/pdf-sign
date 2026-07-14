@@ -191,6 +191,10 @@ export default function Home() {
               <li><ICheck /> Works offline after unlocking</li>
             </ul>
             <BuyButton />
+            <p className={s.priceSub} style={{ marginTop: 16, fontSize: '0.85rem' }}>
+              Price in USD. Taxes may apply and will be calculated at checkout by Paddle,
+              our authorized reseller.
+            </p>
           </div>
         </div>
       </section>
