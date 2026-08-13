@@ -100,7 +100,7 @@ export function SuccessClient() {
       {state.kind === 'error' && (
         <div className={s.err}>
           We couldn&apos;t find a purchase for this link. If you just paid, check the email
-          receipt for your license key, or contact support@signfillpdf.com.
+          receipt for your license key, or contact {config.supportEmail}.
         </div>
       )}
     </div>

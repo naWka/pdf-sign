@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import d from './privacy.module.css'
 import { Nav, Footer } from '@/components/SiteChrome'
+import { config } from '@/lib/config'
 
 export const metadata: Metadata = {
   title: 'Privacy Policy — Sign & Fill PDF',
@@ -76,7 +77,7 @@ export default function Privacy() {
 
         <h2>Contact</h2>
         <p>
-          Questions about this policy? Email us at privacy@signfillpdf.com and we will get
+          Questions about this policy? Email us at {config.supportEmail} and we will get
           back to you.
         </p>
       </article>

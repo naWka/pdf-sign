@@ -18,7 +18,9 @@ const body = Hanken_Grotesk({
   display: 'swap',
 })
 
-const SITE = 'https://signfillpdf.com'
+// Where the site actually lives today (GitHub Pages). Used for metadataBase, so
+// canonical/OG URLs must point at a host that resolves.
+const SITE = 'https://nawka.github.io/pdf-sign'
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE),

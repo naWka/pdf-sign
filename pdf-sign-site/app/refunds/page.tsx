@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import d from '../privacy/privacy.module.css'
 import { Nav, Footer } from '@/components/SiteChrome'
+import { config } from '@/lib/config'
 
 export const metadata: Metadata = {
   title: 'Refund Policy — Sign & Fill PDF',
@@ -26,7 +27,7 @@ export default function Refunds() {
 
         <h2>How to request a refund</h2>
         <p>
-          Email support@signfillpdf.com from the address you used at checkout, within 14 days of your
+          Email {config.supportEmail} from the address you used at checkout, within 14 days of your
           purchase. Include your order or receipt number (from your Paddle receipt email). We will
           process the refund promptly.
         </p>
@@ -46,7 +47,7 @@ export default function Refunds() {
         </p>
 
         <h2>Contact</h2>
-        <p>Any questions about refunds? Email support@signfillpdf.com and we&apos;ll help.</p>
+        <p>Any questions about refunds? Email {config.supportEmail} and we&apos;ll help.</p>
       </article>
       <Footer />
     </>
