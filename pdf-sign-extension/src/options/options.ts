@@ -1,5 +1,5 @@
 import { storage } from '@/shared/storage'
-import { CHECKOUT_URL, PRIVACY_URL } from '@/shared/constants'
+import { CHECKOUT_URL, PAYWALL_ENABLED, PRIVACY_URL } from '@/shared/constants'
 import { applyLicenseKey, clearLicense } from '@/license/license'
 import { icons } from '@/editor/ui/icons'
 import { toast } from '@/editor/ui/toast'
@@ -11,6 +11,12 @@ $<HTMLAnchorElement>('#privacy-link').href = PRIVACY_URL
 // --- License section -----------------------------------------------------
 
 async function renderLicense(): Promise<void> {
+  // Monetisation off: hide the whole card. There is no key to buy or paste, and
+  // an inert unlock form in Options is just a dead end for the user.
+  if (!PAYWALL_ENABLED) {
+    $('#license-card').hidden = true
+    return
+  }
   const body = $('#license-body')
   const license = await storage.getLicense()
 

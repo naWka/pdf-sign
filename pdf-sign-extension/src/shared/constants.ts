@@ -1,6 +1,14 @@
 // Central knobs. Business-tunable numbers live here so there is one place to
 // change them, and the free limit is confirmable by the product owner (4 or 5).
 
+/**
+ * Master switch for monetisation. While this is false the extension is entirely
+ * free: no export gate, no counter in the UI, no license/unlock affordances —
+ * nothing that would point at a checkout that does not exist yet. Flip it to
+ * true once a real checkout and a real license public key are in place.
+ */
+export const PAYWALL_ENABLED = false
+
 /** Free exports before the paywall gates further downloads. Owner-confirmed. */
 export const FREE_EXPORT_LIMIT = 5
 
@@ -24,7 +32,7 @@ export const LICENSE_RECHECK_INTERVAL_MS = 10 * 24 * 60 * 60 * 1000 // ~10 days
  * dev builds working before the site exists.
  */
 export const SITE_URL =
-  import.meta.env.VITE_SITE_URL?.replace(/\/$/, '') || 'https://signfillpdf.com'
+  import.meta.env.VITE_SITE_URL?.replace(/\/$/, '') || 'https://nawka.github.io/pdf-sign'
 export const CHECKOUT_URL = import.meta.env.VITE_CHECKOUT_URL || `${SITE_URL}/pricing`
 export const PRIVACY_URL = `${SITE_URL}/privacy`
 /** Public endpoint that returns only { status } for a license (best-effort recheck). */

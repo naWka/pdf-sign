@@ -1,5 +1,5 @@
 import { storage } from '@/shared/storage'
-import { FREE_EXPORT_LIMIT, PRIVACY_URL } from '@/shared/constants'
+import { FREE_EXPORT_LIMIT, PAYWALL_ENABLED, PRIVACY_URL } from '@/shared/constants'
 
 const $ = <T extends HTMLElement>(sel: string) => document.querySelector<T>(sel)!
 
@@ -18,6 +18,17 @@ privacy.href = PRIVACY_URL
 
 async function renderStatus() {
   const status = $('#status')
+
+  // Monetisation off: no counter, no meter — just say it is free.
+  if (!PAYWALL_ENABLED) {
+    status.className = 'status status--unlocked'
+    status.innerHTML = `
+      <div class="status__title">Free — unlimited</div>
+      <div class="status__body">Sign and fill as many PDFs as you like. Nothing is uploaded.</div>`
+    status.hidden = false
+    return
+  }
+
   const [license, usage] = await Promise.all([
     storage.getLicense(),
     storage.getUsage(),

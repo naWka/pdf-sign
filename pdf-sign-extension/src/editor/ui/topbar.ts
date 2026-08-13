@@ -4,7 +4,7 @@
 
 import { store } from '../state'
 import { storage } from '@/shared/storage'
-import { FREE_EXPORT_LIMIT, PRIVACY_URL } from '@/shared/constants'
+import { FREE_EXPORT_LIMIT, PAYWALL_ENABLED, PRIVACY_URL } from '@/shared/constants'
 import { icons } from './icons'
 
 export function mountTopbar(el: HTMLElement, onDownload: () => void): void {
@@ -31,6 +31,11 @@ export function mountTopbar(el: HTMLElement, onDownload: () => void): void {
   })
 
   const pill = el.querySelector<HTMLElement>('#license-pill')!
+  // Monetisation off: no usage pill at all, nothing to count down.
+  if (!PAYWALL_ENABLED) {
+    pill.remove()
+    return
+  }
   void refreshPill(pill)
   storage.onChanged((changes) => {
     if (changes['ssp.license.v1'] || changes['ssp.usage.v1']) void refreshPill(pill)

@@ -1,6 +1,6 @@
 {
   "name": "pdf-sign-extension",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Sign & Fill PDF — sign and fill any PDF locally in your browser. No upload, no account.",
   "private": true,
   "type": "module",

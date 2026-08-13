@@ -4,7 +4,7 @@
 // license) removes the gate entirely — including offline.
 
 import { storage } from '@/shared/storage'
-import { FREE_EXPORT_LIMIT, CHECKOUT_URL } from '@/shared/constants'
+import { FREE_EXPORT_LIMIT, CHECKOUT_URL, PAYWALL_ENABLED } from '@/shared/constants'
 import { isUnlocked } from '@/license/license'
 import { icons } from './ui/icons'
 
@@ -16,6 +16,10 @@ export interface GateStatus {
 }
 
 export async function checkGate(): Promise<GateStatus> {
+  // Monetisation off: every export is allowed and nothing is counted.
+  if (!PAYWALL_ENABLED) {
+    return { allowed: true, unlocked: true, used: 0, remaining: Infinity }
+  }
   const unlocked = await isUnlocked()
   const usage = await storage.getUsage()
   const used = usage.exportsUsed
@@ -30,6 +34,7 @@ export async function checkGate(): Promise<GateStatus> {
 
 /** Count one successful export (no-op once unlocked, to avoid overflow). */
 export async function recordExport(): Promise<void> {
+  if (!PAYWALL_ENABLED) return
   if (await isUnlocked()) return
   const usage = await storage.getUsage()
   await storage.setUsage({ exportsUsed: usage.exportsUsed + 1 })

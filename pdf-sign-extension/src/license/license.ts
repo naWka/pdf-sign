@@ -3,7 +3,7 @@
 // punished: if the network is unavailable, a previously-valid license stays valid.
 
 import { storage } from '@/shared/storage'
-import { LICENSE_RECHECK_INTERVAL_MS, LICENSE_STATUS_URL } from '@/shared/constants'
+import { LICENSE_RECHECK_INTERVAL_MS, LICENSE_STATUS_URL, PAYWALL_ENABLED } from '@/shared/constants'
 import type { LicenseCache } from '@/shared/types'
 import { verifyLicenseToken } from './verify'
 
@@ -44,6 +44,9 @@ export async function clearLicense(): Promise<void> {
  * failure is ignored so offline use keeps working.
  */
 export async function maybeRecheckOnline(): Promise<void> {
+  // Monetisation off: there is no license to re-check, so the extension makes no
+  // network requests at all.
+  if (!PAYWALL_ENABLED) return
   const license = await storage.getLicense()
   if (!license?.valid) return
   if (Date.now() - license.lastOnlineCheck < LICENSE_RECHECK_INTERVAL_MS) return
